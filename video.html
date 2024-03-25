@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <video id="video-player" controls autoplay>
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const serialNumber = urlParams.get('video');
+
+        if (serialNumber) {
+            const videoSource = `./${serialNumber}`;
+            const videoPlayer = document.getElementById('video-player');
+            videoPlayer.src = videoSource;
+            videoPlayer.play();
+        } else {
+            console.error('Invalid or missing video serial number.');
+        }
+    </script>
+</body>
+</html>
